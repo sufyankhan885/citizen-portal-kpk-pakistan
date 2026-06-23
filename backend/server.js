@@ -1,14 +1,12 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import authRoutes from './src/routes/authRoutes.js';
-import complaintRoutes from './src/routes/complaintRoutes.js';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const authRoutes = require('./src/routes/authRoutes.js');
+const complaintRoutes = require('./src/routes/complaintRoutes.js');
 
 dotenv.config();
-
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +18,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 
 const PORT = process.env.PORT || 5000;
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

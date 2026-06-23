@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: citizen-portal-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://aadimalik8885_db_user:WeessMnArTi1w8Gz@citizenportal.1xz7dbn.mongodb.net/citizenportal?retryWrites=true&w=majority
+      - JWT_SECRET=citizen_portal_secret_key_2024
+      - PORT=5000
+    networks:
+      - citizen-network
+
+  frontend:
+    build: ./frontend
+    container_name: citizen-portal-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - citizen-network
+
+networks:
+  citizen-network:
+    driver: bridge
